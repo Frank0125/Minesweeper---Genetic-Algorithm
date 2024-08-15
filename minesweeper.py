@@ -30,11 +30,12 @@ def print_plays (play1, play2):
     print("Agent 2 played: ", play2)    
 
 def play_RPS (agent1, agent2, iteration):
-    action_agent1 = newPlay(agent1.answers[iteration], agent1.plays[iteration]) 
+    action_agent1 = new_play(agent1.answers[iteration], agent1.plays[iteration]) 
     agent1.plays.append(action_agent1)
     print_plays(action_agent1, agent2.plays[iteration])
     result = win_condition_RPS(action_agent1, agent2.plays[iteration])
     agent1.score += result
+    agent1.answers.append(update_answer(result))
     print("Agent 1 score: ", agent1.score)
     return result
 
@@ -44,12 +45,25 @@ def multiple_plays (agent1, agent2, n):
             play_RPS(agent1, agent2, i)
     print("Agent 1 plays: ", agent1.plays)
         
-def newPlay(answer, play):
+def new_play(answer, play):
     if answer == 1 :
           return play
     else :
         return choose_action()
-
+    
+def update_answer(win):
+    if win == 1:
+        return 1
+    else:
+        return 0
+              
+def crossover(parent1, parent2): #crossover between two inteligent agents to create a new one with the right answers
+    agent = agent()
+    for i in range(6):
+        if i%2 == 0:
+            agent.answers[i-1] = parent1.answers[i]
+            agent.answers[i] = parent2.answers[i]
+    return agent
 
 agent1 = agent()
 agent2 = agent()
