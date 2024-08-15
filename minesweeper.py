@@ -7,18 +7,21 @@ class choices:
 	
 	
 class agent:
-    score = 0
-    plays = ["rock", "rock", "paper", "paper", "scissors", "scissors"]
-    answers = [0,0,0,0,0,0] #which plays are correct
+    def __init__(self, score = 0, 
+                plays = ["rock", "rock", "paper", "paper", "scissors", "scissors"], 
+                answers = [0,0,0,0,0,0]):
+        self.score = score
+        self.plays = plays
+        self.answers = answers
 
 
 def win_condition_RPS (action_agent1, action_agent2): #from the perspective of agent1
     if action_agent1 == action_agent2:
-            return 0 #draw
+        return 0 #draw
     elif (action_agent1 == choices.paper and action_agent2 == choices.rock) or (action_agent1 == choices.rock and action_agent2 == choices.scissors) or (action_agent1 == choices.scissors and action_agent2 == choices.paper):
-            return 1 #agent1 wins
+        return 1 #agent1 wins
     elif (action_agent1 == choices.rock and action_agent2 == choices.paper) or (action_agent1 == choices.scissors and action_agent2 == choices.rock) or (action_agent1 == choices.paper and action_agent2 == choices.scissors):
-            return -1 #agent1 loses
+        return -1 #agent1 loses
     
 
 def choose_action ():
@@ -38,7 +41,6 @@ def play_RPS (agent1, agent2, iteration):
     print("Agent 1 score: ", agent1.score)
     return result
 
-
 def multiple_plays (agent1, agent2, n):
     for i in range(n):
             play_RPS(agent1, agent2, i)
@@ -46,7 +48,7 @@ def multiple_plays (agent1, agent2, n):
         
 def newPlay(answer, play):
     if answer == 1 :
-          return play
+        return play
     else :
         return choose_action()
 
