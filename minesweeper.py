@@ -30,10 +30,10 @@ def print_plays (play1, play2):
     print("Agent 2 played: ", play2)    
 
 def play_RPS (agent1, agent2, iteration):
-    action_agent1 = newPlay() 
+    action_agent1 = newPlay(agent1.answers[iteration], agent1.plays[iteration]) 
     agent1.plays.append(action_agent1)
-    print_plays(action_agent1, agent2.play[iteration])
-    result = win_condition_RPS(action_agent1, agent2.play[iteration])
+    print_plays(action_agent1, agent2.plays[iteration])
+    result = win_condition_RPS(action_agent1, agent2.plays[iteration])
     agent1.score += result
     print("Agent 1 score: ", agent1.score)
     return result
