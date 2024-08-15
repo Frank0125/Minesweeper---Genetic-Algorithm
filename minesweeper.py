@@ -5,9 +5,8 @@ class Choices:
 	paper = "paper"
 	scissors = "scissors"
 	
-    def __init__(self, score = 0, 
-                plays = ["rock", "rock", "paper", "paper", "scissors", "scissors"], 
-                answers = [0,0,0,0,0,0]):
+class Agent:
+    def __init__(self, score = 0, plays = None, answers = None):
         if plays is None:
             plays = [random.choice([Choices.rock, Choices.paper, Choices.scissors]) for _ in range(6)]
         if answers is None:
