@@ -63,8 +63,8 @@ def crossover(parent1, parent2):
 
 def mutation(child, mutation_rate):
     for i in range(len(child.answers)):
-        if (random.random()) < mutation_rate: #Creo que el calculo para la ejecutar la mutación esta raro
-            child.answers[i] = random.randint(0, 1) #aqui estamos haciendo que mute la respuesta y provoca que crea que una respuesta es correcta cuando no
+        if (random.random()) < mutation_rate:
+            child.answers[i] = random.randint(0, 1) 
     return child
      
 def evolve_population(population, generations, mutation_rate):
@@ -76,7 +76,7 @@ def evolve_population(population, generations, mutation_rate):
         # Seleccion - Primera mitad de la poblacion
         top_half = population[ : len(population) // 2]
 
-        # Crossover & Mutacion
+        # Crossover Y Mutación
         for i in range(len(population)):
             parent1 = random.choice(top_half)
             parent2 = random.choice(top_half)
@@ -86,7 +86,7 @@ def evolve_population(population, generations, mutation_rate):
 
         population = next_gen
 
-        #creamos al agente NO inteligente al que se debera ganarle
+        #Creamos al agente NO inteligente al que se debera ganarle
         dumb_agent = Agent(plays=["rock", "rock", "rock", "rock", "rock", "rock"], answers=[0, 0, 0, 0, 0, 0])
 
         # Simula juegos para poder cambiar el score obtenido
@@ -94,17 +94,40 @@ def evolve_population(population, generations, mutation_rate):
             multiple_plays(random.choice(population), dumb_agent, 6)
 
         # Ordena a la poblacion en base al score de mayor a menor pero solo para mostrar el mejor agente
-        print(f"Gen {gen+1} terminada: El mejor Agente obtuvo: {order_population_max(population)[0].score}")
+        print(f"Gen {gen+1} terminada: El mejor Agente obtuvo: {order_population_max(population)[0].score} de puntaje")
 
     return population
 
 def order_population_max(population):
     return sorted(population, key=lambda x: x.score, reverse=True)
 
-def clear_score(population):
-    for agent in population:
-        agent.score = 0
-    return population
+def won_lost_draw(result):
+    if result >= 4:
+        return "Gano"
+    elif result <= 2:
+        return "Perdio"
+    else:
+        return "Empato"
+
+def create_dumb_agent():
+    input("Presiona enter para crear un agente NO inteligente, jugadas: rock (r), paper (p), scissors (s)")
+    p1 = input("Ingresa primera jugada: ")
+    p2 = input("Ingresa segunda jugada: ")
+    p3 = input("Ingresa tercera jugada: ")
+    p4 = input("Ingresa cuarta jugada: ")
+    p5 = input("Ingresa quinta jugada: ")
+    p6 = input("Ingresa sexta jugada: ")
+
+    player_plays = [p1, p2, p3, p4, p5, p6]
+    for i in range(len(player_plays)):
+        if player_plays[i] == "s" or "S":
+            player_plays[i] = "scissors"
+        elif player_plays[i] == "r" or "R":
+            player_plays[i] = "rock"
+        elif player_plays[i] == "p" or "P":
+            player_plays[i] = "paper"
+
+    return Agent(plays=player_plays, answers=[0, 0, 0, 0, 0, 0])
 
 # Creamos un arreglo de agentes para nuestra poblacion
 population = [Agent() for _ in range(10)]
@@ -118,4 +141,5 @@ evolved_population = evolve_population(population, generations, mutation_rate)
 print("\nTop 3 Agentes resultantes de la evolucion:")
 for idx, agent in enumerate(order_population_max(evolved_population)[:3]):
     print(f"Agente {idx+1}: Respuestas: {agent.answers} | Puntaje: {agent.score}")
-    print(f"Jugadas: {agent.plays}\n")
+    print(f"Jugadas: {agent.plays}")
+    print(f"Nuestro agente {won_lost_draw(agent.score)}\n")
