@@ -109,25 +109,6 @@ def won_lost_draw(result):
     else:
         return "Perdio"
 
-def create_dumb_agent():
-    input("Presiona enter para crear un agente NO inteligente, jugadas: rock (r), paper (p), scissors (s)")
-    p1 = input("Ingresa primera jugada: ")
-    p2 = input("Ingresa segunda jugada: ")
-    p3 = input("Ingresa tercera jugada: ")
-    p4 = input("Ingresa cuarta jugada: ")
-    p5 = input("Ingresa quinta jugada: ")
-    p6 = input("Ingresa sexta jugada: ")
-
-    player_plays = [p1, p2, p3, p4, p5, p6]
-    for i in range(len(player_plays)):
-        if player_plays[i] == "s" or "S":
-            player_plays[i] = "scissors"
-        elif player_plays[i] == "r" or "R":
-            player_plays[i] = "rock"
-        elif player_plays[i] == "p" or "P":
-            player_plays[i] = "paper"
-
-    return Agent(plays=player_plays, answers=[0, 0, 0, 0, 0, 0])
 
 # Creamos un arreglo de agentes para nuestra poblacion
 population = [Agent() for _ in range(10)]
