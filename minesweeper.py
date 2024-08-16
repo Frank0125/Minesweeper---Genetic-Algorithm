@@ -102,12 +102,12 @@ def order_population_max(population):
     return sorted(population, key=lambda x: x.score, reverse=True)
 
 def won_lost_draw(result):
-    if result >= 4:
+    if result >= 1:
         return "Gano"
-    elif result <= 2:
-        return "Perdio"
-    else:
+    elif result == 0:
         return "Empato"
+    else:
+        return "Perdio"
 
 def create_dumb_agent():
     input("Presiona enter para crear un agente NO inteligente, jugadas: rock (r), paper (p), scissors (s)")
